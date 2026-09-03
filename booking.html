@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Book a Trip | Ramudu's Express</title><link rel="stylesheet" href="css/style.css"><style>main{background:#f6f7f9;padding:70px 0;min-height:70vh}.form{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:35px;max-width:800px;margin:auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:grid;gap:7px;font-size:12px;font-weight:800}input,select,textarea{padding:12px;border:1px solid #e4e7ec;border-radius:8px;width:100%;font:inherit}.full{grid-column:1/-1}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}</style></head><body><header class="header"><div class="container nav"><a class="brand" href="index.html">
+    <b>RE</b><span><strong>RAMUDU'S EXPRESS</strong><small>WE SET THE STANDARD</small>
+    </span></a><a class="nav-btn" href="index.html">Home</a></div></header><main>
+        <div class="container"><div class="heading">
+            <div><span class="eyebrow">BOOKING REQUEST</span><h2>Plan your journey.
+
+            </h2></div><p>Send us your trip details. This starter prepares a WhatsApp request and stores a demo booking locally.
+
+            </p></div><form id="bookingForm" class="form"><div class="grid">
+                <label>Full name<input name="name" required>
+                </label><label>Phone<input name="phone" required></label>
+                <label>Email<input name="email" type="email"></label><label>Passengers<input name="passengers" type="number" min="1" value="1" required>
+                </label><label>Pickup<input name="pickup" value="Monsterlus" required>
+                </label><label>Destination<input name="destination" required></label><label>Date<input name="date" type="date" required></label>
+                <label>Time<input name="time" type="time" required></label><label>Service<select name="service" required><option value="">Select</option>
+                    <option>Group Transport</option><option>Excursions & Tours</option>
+                    <option>Airport Transfer</option>
+                    <option>Corporate Travel</option></select></label><label>Vehicle<select name="vehicle" required><option value="">Select</option><option>Toyota Quantum</option>
+                        <option>Minibus Fleet</option><option>Large Coach</option></select></label>
+                        <label class="full">Notes<textarea name="notes" rows="5"></textarea></label>
+                    </div><br><button class="btn primary" type="submit">Send booking request</button><p id="msg"></p></form></div></main>
+                    <script>const f=document.getElementById('bookingForm');const q=new URLSearchParams(location.search);if(q.get('service')==='excursion')f.service.value='Excursions & Tours';f.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f));const b=JSON.parse(localStorage.getItem('ramudus_bookings')||'[]');d.id='RE-'+Date.now();d.status='Pending';d.createdAt=new Date().toISOString();b.push(d);localStorage.setItem('ramudus_bookings',JSON.stringify(b));const text=Object.entries(d).map(([k,v])=>k+': '+v).join('\n');document.getElementById('msg').textContent='Request saved. Opening WhatsApp...';window.open('https://wa.me/27794490751?text='+encodeURIComponent('Hello Ramudu\'s Express, I would like to request a booking.\n'+text),'_blank');});</script></body></html>
